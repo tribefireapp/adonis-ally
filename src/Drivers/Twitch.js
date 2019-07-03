@@ -63,7 +63,7 @@ class Twitch extends OAuth2Scheme {
    * @return {String} [description]
    */
   get authorizeUrl () {
-    return '/oauth2/authorize'
+    return 'oauth2/authorize'
   }
 
   /**
@@ -73,7 +73,7 @@ class Twitch extends OAuth2Scheme {
    * @return {String}
    */
   get accessTokenUrl () {
-    return '/oauth2/token'
+    return 'oauth2/token'
   }
 
   /**
