@@ -63,7 +63,7 @@ class Twitch extends OAuth2Scheme {
    * @return {String} [description]
    */
   get authorizeUrl () {
-    return '/oauth2/authorize'
+    return 'oauth2/authorize'
   }
 
   /**
@@ -73,7 +73,7 @@ class Twitch extends OAuth2Scheme {
    * @return {String}
    */
   get accessTokenUrl () {
-    return '/oauth2/token'
+    return 'oauth2/token'
   }
 
   /**
@@ -82,7 +82,7 @@ class Twitch extends OAuth2Scheme {
    * @return {String}
    */
   get apiUrl () {
-    return 'https://id.twitch.tv/oauth2'
+    return 'https://api.twitch.tv/helix'
   }
 
   /**
@@ -112,7 +112,7 @@ class Twitch extends OAuth2Scheme {
    * @private
    */
   async _getUserProfile (accessToken, fields) {
-    const response = await got(`${this.apiUrl}/user`, {
+    const response = await got(`${this.apiUrl}/users`, {
       headers: {
         'Authorization': accessToken?'OAuth ' + accessToken : undefined,
         'Accept': `Accept: application/vnd.twitchtv.${this._api_version}+json`,
