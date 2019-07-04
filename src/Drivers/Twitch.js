@@ -97,7 +97,7 @@ class Twitch extends OAuth2Scheme {
    * @private
    */
   _getInitialScopes (scopes) {
-    return _.size(scopes) ? scopes : ['user_read']
+    return _.size(scopes) ? scopes : ['user:read:email']
   }
 
   /**
@@ -114,7 +114,7 @@ class Twitch extends OAuth2Scheme {
   async _getUserProfile (accessToken, fields) {
     const response = await got(`${this.apiUrl}/users`, {
       headers: {
-        'Authorization': accessToken?'OAuth ' + accessToken : undefined,
+        'Authorization': accessToken?'Bearer ' + accessToken : undefined,
         'Client-ID': this.config.clientId
       },
       json: true
@@ -183,17 +183,18 @@ class Twitch extends OAuth2Scheme {
     const accessTokenResponse = await this.getAccessToken(code, this._redirectUri, {
       grant_type: 'authorization_code'
     })
-    const userProfile = await this._getUserProfile(accessTokenResponse.accessToken, fields)
+    const returnUser = await this._getUserProfile(accessTokenResponse.accessToken, fields)
+    const userProfile = returnUser.data[0]
 
     const user = new AllyUser()
     user
       .setOriginal(userProfile)
       .setFields(
-        userProfile._id,
+        userProfile.id,
         userProfile.display_name,
         userProfile.email,
-        userProfile.name,
-        userProfile.logo
+        userProfile.login,
+        userProfile.profile_image_url
       )
       .setToken(
         accessTokenResponse.accessToken,
