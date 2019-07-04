@@ -115,7 +115,6 @@ class Twitch extends OAuth2Scheme {
     const response = await got(`${this.apiUrl}/users`, {
       headers: {
         'Authorization': accessToken?'OAuth ' + accessToken : undefined,
-        'Accept': `Accept: application/vnd.twitchtv.${this._api_version}+json`,
         'Client-ID': this.config.clientId
       },
       json: true
