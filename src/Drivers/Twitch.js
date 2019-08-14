@@ -97,7 +97,7 @@ class Twitch extends OAuth2Scheme {
    * @private
    */
   _getInitialScopes (scopes) {
-    return ['user:read:email', 'channel:read:subscriptions', 'user_subscriptions']
+    return ['user:read:email','user_subscriptions']
   }
 
   /**
