@@ -97,7 +97,7 @@ class Discord extends OAuth2Scheme {
    * @private
    */
   _getInitialScopes (scopes) {
-    return _.size(scopes) ? scopes : ['email']
+    return _.size(scopes) ? scopes : ['email', 'identify']
   }
 
   /**
